@@ -1,11 +1,17 @@
 import { RadioGroupProps } from "@/utils/types"
-import React, { FC } from "react"
+import React, { FC, ForwardRefExoticComponent, RefAttributes, forwardRef } from "react"
 
-export const RadioGroup: FC<RadioGroupProps> = ({
-    name,
-    label,
-    values,
-}) => {
+export const RadioGroup: ForwardRefExoticComponent<
+    RadioGroupProps & RefAttributes<HTMLInputElement>
+> = forwardRef<HTMLInputElement, RadioGroupProps>(
+    ({
+        name,
+        label,
+        values,
+        onChange
+    }, ref
+) => {
+
     return (
         <div>
             <label className="block text-sm font-medium text-gray-900">{label}</label>
@@ -18,10 +24,12 @@ export const RadioGroup: FC<RadioGroupProps> = ({
                             return (
                                 <div key={index.toString()} className="flex items-center">
                                     <input
+                                        ref={ref}
                                         type="radio"
                                         name={name}
                                         id={id}
                                         className="h-4 w-4 border-gray-300 text-[#1597E4] focus:ring-0 focus:ring-offset-0"
+                                        onChange={onChange}
                                     />
                                     <label htmlFor={id} className="ml-3 block text-xs text-[#7A7A7A] leading-6">
                                         {value}
@@ -34,4 +42,6 @@ export const RadioGroup: FC<RadioGroupProps> = ({
             </fieldset>
         </div>
     )
-}
+})
+
+RadioGroup.displayName = "RadioGroup"

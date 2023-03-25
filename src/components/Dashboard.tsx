@@ -1,11 +1,21 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Button } from "./Button";
 import { Card } from "./Card";
 import { FormModal } from "./FormModal";
+import { addJob } from "@/requests/addJob";
+import { getAllJobs } from "@/requests/getAllJobs";
+import { Job } from "@/utils/types";
 
 export const Dashboard: FC = () => {
-
+    const [jobs, setJobs] = useState<Job[]>([])
     const [isOpened, setIsOpened] = useState(false)
+
+    useEffect(() => {
+        getAllJobs()
+            .then((result) => {
+                setJobs(result)
+            })
+    }, [])
 
     return (
         <>
@@ -21,7 +31,13 @@ export const Dashboard: FC = () => {
                 </div>
                 
                 <div className="flex flex-wrap gap-16 mt-6">
-                    <Card />
+                    {
+                        jobs.map((job, index) => {
+                            return (
+                                <Card key={index.toString()} {...job}/>
+                            )
+                        })
+                    }
                 </div>
             </div>
 

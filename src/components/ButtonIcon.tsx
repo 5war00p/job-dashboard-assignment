@@ -3,11 +3,12 @@ import React, { FC } from "react";
 
 
 export const ButtonIcon: FC<ButtonIconProps> = ({
-    icon: Icon
+    icon: Icon,
+    onClick
 }) => {
 
     return (
-        <button>
+        <button onClick={onClick}>
             <Icon />
         </button>
     )

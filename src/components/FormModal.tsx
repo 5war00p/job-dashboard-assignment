@@ -4,10 +4,10 @@ import { FormModalProps } from '@/utils/types'
 import { FormRenderer } from './form/FormRenderer'
 
 export const FormModal: FC<FormModalProps> = ({
+  data,
   isOpened,
   onClose
 }) => {
-
   return (
     <>
       <Transition appear show={isOpened} as={Fragment}>
@@ -40,7 +40,7 @@ export const FormModal: FC<FormModalProps> = ({
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-[577px] h-[564px] transform overflow-hidden rounded-[10px] bg-white p-8 text-left align-middle shadow-xl transition-all">
-                  <FormRenderer /> 
+                  <FormRenderer onClose={onClose} data={data}/> 
                 </Dialog.Panel>
               </Transition.Child>
             </div>
