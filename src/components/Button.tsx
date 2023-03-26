@@ -6,6 +6,7 @@ export const Button: FC<ButtonProps> = ({
     width,
     height,
     content,
+    disabled = false,
     colorScheme = 'primary',
     onClick
 }) => {
@@ -22,8 +23,11 @@ export const Button: FC<ButtonProps> = ({
             onClick={onClick}
             className={`
                 rounded-md font-medium outline-none 
-                ${colorScheme === 'primary' ? 'text-white bg-[#1597E4]' : 'text-[#1597E4] border border-[#1597E4]'}`
-            }>
+                ${colorScheme === 'primary' ? 'text-white bg-[#1597E4]' : 'text-[#1597E4] border border-[#1597E4]'}
+                ${disabled ? ' bg-gray-500' : ''}`
+            }
+            disabled={disabled}
+            >
             {content}
         </button>
     )

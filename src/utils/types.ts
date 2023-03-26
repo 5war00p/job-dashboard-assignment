@@ -8,6 +8,7 @@ export interface ButtonProps {
     width: string
     height: string
     content: string
+    disabled?: boolean
     colorScheme?: 'primary' | 'secondary'
     onClick: (e: MouseEvent<HTMLButtonElement>) => unknown
 }

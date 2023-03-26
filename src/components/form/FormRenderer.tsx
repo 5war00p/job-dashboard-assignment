@@ -27,7 +27,7 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
         applyType: ''
     })
 
-    const { control, registry, formState: { errors }, watch, handleSubmit, setFocus } = formControlHook
+    const { control, registry, formState: { errors, isValid: isFormValid }, watch, handleSubmit, setFocus } = formControlHook
     const fieldWatcher = watch()
 
     useEffect(() => {
@@ -321,6 +321,7 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
                         width="68px"
                         height="40px"
                         content="Next"
+                        disabled={!!Object.keys(errors).length || !isFormValid}
                         onClick={() => setStep(2)}
                     />
                 </div>
