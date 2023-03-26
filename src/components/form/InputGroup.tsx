@@ -8,6 +8,7 @@ export const InputGroup: ForwardRefExoticComponent<
         label,
         name,
         id,
+        value,
         required = false,
         errorMessage = '',
         placeholder,
@@ -29,6 +30,7 @@ export const InputGroup: ForwardRefExoticComponent<
                     type="text"
                     name={name}
                     id={id}
+                    value={value}
                     placeholder={placeholder}
                     className="block w-full text-sm rounded-[5px] border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#1597E4]"
                     onChange={onChange}

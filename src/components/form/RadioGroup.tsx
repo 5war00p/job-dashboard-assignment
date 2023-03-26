@@ -28,6 +28,7 @@ export const RadioGroup: ForwardRefExoticComponent<
                                         type="radio"
                                         name={name}
                                         id={id}
+                                        value={value}
                                         className="h-4 w-4 border-gray-300 text-[#1597E4] focus:ring-0 focus:ring-offset-0"
                                         onChange={onChange}
                                     />

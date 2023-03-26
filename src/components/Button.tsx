@@ -18,8 +18,8 @@ export const Button: FC<ButtonProps> = ({
              * 
              * Refer: https://v2.tailwindcss.com/docs/just-in-time-mode#arbitrary-value-support
              */
-            onClick={onClick}
             style={{ width, height }}
+            onClick={onClick}
             className={`
                 rounded-md font-medium outline-none 
                 ${colorScheme === 'primary' ? 'text-white bg-[#1597E4]' : 'text-[#1597E4] border border-[#1597E4]'}`

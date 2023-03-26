@@ -8,6 +8,7 @@ import { useMutateJob } from "@/hooks/useMutateJob"
 import { addJob } from "@/requests/addJob"
 import { FormRendereProps } from "@/utils/types"
 import { updateJob } from "@/requests/updateJob"
+import { FORM_FIELDS, PLACEHOLDERS } from "@/constants/formFields"
 
 export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {    
     const [step, setStep] = useState(1)
@@ -31,9 +32,9 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
 
     useEffect(() => {
         if (step === 1) {
-            setFocus('jobTitle')
+            setFocus(FORM_FIELDS.JOB_TITLE)
         } else if (step === 2) {
-            setFocus('minExperience')
+            setFocus(FORM_FIELDS.MIN_EXPERIENCE)
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [step])
@@ -49,7 +50,8 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
                      */
                 })
         } else {
-            addJob({...fieldWatcher})
+            const newJob = !!fieldWatcher.applyType ? {...fieldWatcher, applyType: 'Quick apply'} : {...fieldWatcher}
+            addJob(newJob)
                 .then(() => {
                     onClose()
                     /**
@@ -70,15 +72,16 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
 
                         <Controller 
                             control={control}
-                            name="minExperience"
+                            name={FORM_FIELDS.MIN_EXPERIENCE}
                             render={({ field: { name, onChange }}) => {
                                 return (
                                     <InputGroup
                                         {...registry.minExperience}
+                                        value={fieldWatcher.minExperience}
                                         label="Experience"
                                         name={name}
                                         id="min-expereince"
-                                        placeholder="Minimum"
+                                        placeholder={PLACEHOLDERS.MINIMUM}
                                         onChange={onChange}
                                     />
                                 )
@@ -87,15 +90,16 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
 
                         <Controller 
                             control={control}
-                            name="maxExperience"
+                            name={FORM_FIELDS.MAX_EXPERIENCE}
                             render={({ field: { name, onChange }}) => {
                                 return (
                                     <InputGroup
                                         {...registry.maxExperience}
+                                        value={fieldWatcher.maxExperience}
                                         label=""
                                         name={name}
                                         id="max-expereince"
-                                        placeholder="Maximum"
+                                        placeholder={PLACEHOLDERS.MAXIMUM}
                                         onChange={onChange}
                                     />
                                 )
@@ -108,15 +112,16 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
 
                         <Controller 
                             control={control}
-                            name="minSalary"
+                            name={FORM_FIELDS.MIN_SALARY}
                             render={({ field: { name, onChange }}) => {
                                 return (
                                     <InputGroup
                                         {...registry.minSalary}
+                                        value={fieldWatcher.minSalary}
                                         label="Salary"
                                         name={name}
                                         id="min-salary"
-                                        placeholder="Minimum"
+                                        placeholder={PLACEHOLDERS.MINIMUM}
                                         onChange={onChange}
                                     />
                                 )
@@ -125,15 +130,16 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
 
                         <Controller 
                             control={control}
-                            name="maxSalary"
+                            name={FORM_FIELDS.MAX_SALARY}
                             render={({ field: { name, onChange }}) => {
                                 return (
                                     <InputGroup
                                         {...registry.maxSalary}
+                                        value={fieldWatcher.maxSalary}
                                         label=""
                                         name={name}
                                         id="max-salary"
-                                        placeholder="Maximum" 
+                                        placeholder={PLACEHOLDERS.MAXIMUM} 
                                         onChange={onChange}
                                     />
                                 )
@@ -145,15 +151,16 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
 
                     <Controller 
                         control={control}
-                        name="totalEmployee"
+                        name={FORM_FIELDS.EMP_COUNT}
                         render={({ field: { name, onChange }}) => {
                             return (
                                 <InputGroup
                                     {...registry.totalEmployee}
+                                    value={fieldWatcher.totalEmployee}
                                     label="Total employee"
                                     name={name}
-                                    id="employee-count"
-                                    placeholder="ex. 100"
+                                    id="total-employee"
+                                    placeholder={PLACEHOLDERS.EMP_COUNT}
                                     onChange={onChange}
                                 />
                             )
@@ -163,7 +170,7 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
 
                     <Controller 
                         control={control}
-                        name="applyType"
+                        name={FORM_FIELDS.APPLY_TYPE}
                         render={({ field: { name, onChange }}) => {
                             return (
                                 <RadioGroup
@@ -208,16 +215,17 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
 
                     <Controller 
                         control={control}
-                        name="jobTitle"
+                        name={FORM_FIELDS.JOB_TITLE}
                         render={({ field: { name, onChange }}) => {
                             return (
                                 <InputGroup
                                     {...registry.jobTitle}
                                     label="Job title"
                                     name={name}
+                                    value={fieldWatcher.jobTitle}
                                     required
                                     id="job-title"
-                                    placeholder="ex. UX UI Designer" 
+                                    placeholder={PLACEHOLDERS.JOB_TITLE}
                                     errorMessage={errors.jobTitle?.message}
                                     onChange={onChange}
                                 />
@@ -227,16 +235,17 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
 
                     <Controller 
                         control={control}
-                        name="companyName"
+                        name={FORM_FIELDS.COMPANY_NAME}
                         render={({ field: { name, onChange }}) => {
                             return (
                                 <InputGroup
                                     {...registry.companyName}
                                     label="Company name"
                                     name={name}
+                                    value={fieldWatcher.companyName}
                                     required
                                     id="company-name"
-                                    placeholder="ex. Google"
+                                    placeholder={PLACEHOLDERS.COMPANY_NAME}
                                     errorMessage={errors.companyName?.message}
                                     onChange={onChange}
                                 />
@@ -246,16 +255,17 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
                     
                     <Controller 
                         control={control}
-                        name="industry"
+                        name={FORM_FIELDS.INDUSTRY}
                         render={({ field: { name, onChange }}) => {
                             return (
                                 <InputGroup
                                     {...registry.industry}
                                     label="Industry"
                                     name={name}
+                                    value={fieldWatcher.industry}
                                     required
                                     id="industry"
-                                    placeholder="ex. Information Technology"
+                                    placeholder={PLACEHOLDERS.INDUSTRY}
                                     errorMessage={errors.industry?.message}
                                     onChange={onChange}
                                 />
@@ -267,15 +277,16 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
                         
                         <Controller 
                             control={control}
-                            name="location"
+                            name={FORM_FIELDS.LOCATION}
                             render={({ field: { name, onChange }}) => {
                                 return (
                                     <InputGroup
                                         {...registry.location}
+                                        value={fieldWatcher.location}
                                         label="Location"
                                         name={name}
                                         id="location"
-                                        placeholder="ex. Chennai"
+                                        placeholder={PLACEHOLDERS.LOCATION}
                                         onChange={onChange}
                                     />
                                 )
@@ -285,15 +296,16 @@ export const FormRenderer: FC<FormRendereProps> =  ({ data, onClose }) => {
                         
                         <Controller 
                             control={control}
-                            name="remoteType"
+                            name={FORM_FIELDS.REMOTE_TYPE}
                             render={({ field: { name, onChange }}) => {
                                 return (
                                     <InputGroup
                                         {...registry.remoteType}
+                                        value={fieldWatcher.remoteType}
                                         label="Remote type"
                                         name={name}
                                         id="remote-type"
-                                        placeholder="ex. In-office" 
+                                        placeholder={PLACEHOLDERS.REMOTE_TYPE}
                                         onChange={onChange}
                                     />
                                 )

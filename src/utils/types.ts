@@ -39,6 +39,7 @@ export interface InputGroupProps {
     required?: boolean
     errorMessage?: string
     placeholder: string
+    value: string
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
