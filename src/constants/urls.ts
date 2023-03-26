@@ -1,0 +1,1 @@
+export const API_ENDPOINT = "https://641ef62cad55ae01ccb36ca0.mockapi.io/api/jobs"

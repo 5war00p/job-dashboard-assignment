@@ -1,9 +1,10 @@
+import { API_ENDPOINT } from "@/constants/urls"
 import { Job } from "@/utils/types"
 import axios from "axios"
 
 export const getAllJobs = async (): Promise<Job[]> => {
 
-    const url = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/`
+    const url = `${process.env.NEXT_PUBLIC_API_ENDPOINT ?? API_ENDPOINT}/`
     
     try {
         const response = await axios.get(url)
