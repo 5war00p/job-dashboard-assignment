@@ -40,6 +40,7 @@ A few things were implemented which were not asked in assignment desciption.
 - Live Refetch - as it not implemented but provided a re-fetch buttonon top left to refetch the data on any mutation.
 - Edit/Delete operations design on top right of each card.
 - Error messages on form validations.
+- User cannot navigate (next button is disabled) until first step mandatory fields were filled.
 
 
 
